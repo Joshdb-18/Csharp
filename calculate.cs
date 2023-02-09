@@ -5,20 +5,27 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("What is your monthly salary? $ ");
+        Console.Write("What is your monthly salary? $ ");
         decimal salary = decimal.Parse(Console.ReadLine());
 
         Dictionary<string, decimal> expenses = new Dictionary<string, decimal>();
 
-        Console.WriteLine("Please answer the following survey questions to calculate your daily expenses:");
+        Console.WriteLine("\nPlease answer the following survey questions to calculate your daily expenses:\n");
 
-        expenses["Food"] = decimal.Parse(Console.ReadLine("How much do you spend on food per month? $ "));
-        expenses["Housing"] = decimal.Parse(Console.ReadLine("How much do you spend on housing per month? $ "));
-        expenses["Transportation"] = decimal.Parse(Console.ReadLine("How much do you spend on transportation per month? $ "));
-        expenses["Utilities"] = decimal.Parse(Console.ReadLine("How much do you spend on utilities (e.g. electricity, water) per month? $ "));
-        expenses["Entertainment"] = decimal.Parse(Console.ReadLine("How much do you spend on entertainment (e.g. movies, hobbies) per month? $ "));
-	expenses["Unforseen_circumstances"] = decimal.Parse(Console.ReadLine("How much do you intend to spend on Unforseen circumstances? $"));
-        
+	Console.Write("How much do you spend on food per month? $ ");
+        expenses["Food"] = decimal.Parse(Console.ReadLine());
+	Console.Write("How much do you spend on housing per month? $ ");
+        expenses["Housing"] = decimal.Parse(Console.ReadLine());
+	Console.Write("How much do you spend on transportation per month? $ ");
+        expenses["Transportation"] = decimal.Parse(Console.ReadLine());
+	Console.Write("How much do you spend on utilities (e.g. electricity, water) per month? $ ");
+        expenses["Utilities"] = decimal.Parse(Console.ReadLine());
+	Console.Write("How much do you spend on entertainment (e.g. movies, hobbies) per month? $ ");
+        expenses["Entertainment"] = decimal.Parse(Console.ReadLine());
+	Console.Write("How much do you intend to spend on Unforseen circumstances? $ ");
+	expenses["Unforseen_circumstances"] = decimal.Parse(Console.ReadLine());
+
+	Console.WriteLine();
 	decimal totalExpenses = 0;
         foreach (var expense in expenses.Values)
         {
