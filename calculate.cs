@@ -46,7 +46,7 @@ class Program
         }
         else
         {
-            Console.WriteLine("You are overspending.");
+            Console.WriteLine("Dammit!!\nYou are overspending.");
         }
     }
 }
