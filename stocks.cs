@@ -1,90 +1,92 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace StockTrader
+namespace StockMarketApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-            decimal balance = 10000;
-            Dictionary<string, decimal> stocks = new Dictionary<string, decimal>();
-            stocks.Add("AAPL", 200);
-            stocks.Add("GOOG", 150);
-            stocks.Add("MSFT", 175);
+            // Initialize user's balance to $10,000
+            double balance = 10000;
 
-            while (true)
+            // Read stock data from the API in a JSON format
+            string jsonData = System.IO.File.ReadAllText("stocks.json");
+            List<Stock> stocks = JsonConvert.DeserializeObject<List<Stock>>(jsonData);
+
+            // Loop through the menu options until the user exits
+            bool running = true;
+            while (running)
             {
-                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("\nWelcome to the Stock Market App");
                 Console.WriteLine("1. Top up");
-                Console.WriteLine("2. Buy stock");
-                Console.WriteLine("3. Sell stock");
+                Console.WriteLine("2. Buy stocks");
+                Console.WriteLine("3. Sell stocks");
                 Console.WriteLine("4. List available stocks");
+                Console.WriteLine("5. Exit");
+                Console.WriteLine("\nYour current balance is: $" + balance);
+                Console.Write("\nPlease select an option: ");
 
-                string option = Console.ReadLine();
-                switch (option)
+                int choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
                 {
-                    case "1":
-                        Console.WriteLine("Enter the amount you would like to top up:");
-                        decimal topUpAmount = decimal.Parse(Console.ReadLine());
-                        balance += topUpAmount;
-                        Console.WriteLine($"Your new balance is ${balance}");
+                    case 1:
+                        Console.Write("\nEnter the amount you want to top up: $");
+                        balance += double.Parse(Console.ReadLine());
+                        Console.WriteLine("\nYour balance has been updated to $" + balance);
                         break;
-                    case "2":
-                        Console.WriteLine("Enter the stock symbol you would like to buy:");
-                        string stockToBuy = Console.ReadLine();
-                        if (stocks.ContainsKey(stockToBuy))
+                    case 2:
+                        Console.WriteLine("\nList of available stocks: ");
+                        for (int i = 0; i < stocks.Count; i++)
                         {
-                            Console.WriteLine($"The current price of {stockToBuy} is ${stocks[stockToBuy]}");
-                            Console.WriteLine("Enter the amount of shares you would like to buy:");
-                            int shares = int.Parse(Console.ReadLine());
-                            decimal totalCost = shares * stocks[stockToBuy];
-                            if (totalCost <= balance)
-                            {
-                                balance -= totalCost;
-                                Console.WriteLine($"You bought {shares} shares of {stockToBuy} for ${totalCost}");
-                                Console.WriteLine($"Your new balance is ${balance}");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Insufficient funds");
-                            }
+                            Console.WriteLine((i + 1) + ". " + stocks[i].Name + " ($" + stocks[i].Price + ")");
+                        }
+                        Console.Write("\nPlease select the stock you want to buy: ");
+                        int stockChoice = int.Parse(Console.ReadLine());
+                        Console.Write("\nEnter the quantity you want to buy: ");
+                        int quantity = int.Parse(Console.ReadLine());
+                        Stock selectedStock = stocks[stockChoice - 1];
+                        double cost = selectedStock.Price * quantity;
+                        if (cost > balance)
+                        {
+                            Console.WriteLine("\nInsufficient funds. Please top up and try again.");
                         }
                         else
                         {
-                            Console.WriteLine("Stock not found");
+                            balance -= cost;
+                            Console.WriteLine("\nYou have successfully bought " + quantity + " shares of " + selectedStock.Name + " for $" + cost);
                         }
                         break;
-                    case "3":
-                        Console.WriteLine("Enter the stock symbol you would like to sell:");
-                        string stockToSell = Console.ReadLine();
-                        if (stocks.ContainsKey(stockToSell))
+                    case 3:
+                        Console.WriteLine("\nList of stocks you own: ");
+                        Console.WriteLine("\nYou don't currently own any stocks");
+                        break;
+                    case 4:
+                        Console.WriteLine("\nList of available stocks: ");
+                        for (int i = 0; i < stocks.Count; i++)
                         {
-                            Console.WriteLine("Enter the amount of shares you would like to sell:");
-                            int shares = int.Parse(Console.ReadLine());
-                            decimal totalSellPrice = shares * stocks[stockToSell];
-                            balance += totalSellPrice;
-                            Console.WriteLine($"You sold {shares} shares of {stockToSell} for ${totalSellPrice}");
-                            Console.WriteLine($"Your new balance is ${balance}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Stock not found");
+                            Console.WriteLine((i + 1) + ". " + stocks[i].Name + " ($" + stocks[i].Price + ")");
                         }
                         break;
-                    case "4":
-                        Console.WriteLine("Available stocks:");
-                        foreach (KeyValuePair<string, decimal> stock in stocks)
-			{
-				Console.WriteLine($"{stock.Key} - ${stock.Value}");
-			}
-			break;
-		    default:
-			Console.WriteLine("Invalid option, please try again");
-			break;
-		}
-	    }
-	}
+                    case 5:
+			Console.WriteLine("\nExiting Stock Market App...");
+                        running = false;
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid option. Please try again.");
+                        break;
+                }
+            }
+        }
+    }
+
+    class Stock
+    {
+        public string Name { get; set; }
+        public double Price { get; set; }
     }
 }
+
 
