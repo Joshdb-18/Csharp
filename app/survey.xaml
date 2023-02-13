@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SalaryExpenseTracker.MainPage">
+    <StackLayout>
+        <Label Text="Enter your monthly salary:" />
+        <Entry x:Name="salaryEntry" />
+
+        <Label Text="Enter your monthly rent:" />
+        <Entry x:Name="rentEntry" />
+
+        <Label Text="Enter your monthly groceries expenses:" />
+        <Entry x:Name="groceriesEntry" />
+
+        <Label Text="Enter your monthly utilities expenses:" />
+        <Entry x:Name="utilitiesEntry" />
+
+        <Label Text="Enter your monthly transportation expenses:" />
+        <Entry x:Name="transportationEntry" />
+
+        <Label Text="Enter your monthly entertainment expenses:" />
+        <Entry x:Name="entertainmentEntry" />
+
+        <Button Text="Calculate" Clicked="OnCalculateButtonClicked" />
+
+        <Label x:Name="dailyLimitLabel" />
+
+        <StackLayout x:Name="progressBarsStackLayout" Orientation="Horizontal">
+            <ProgressBar x:Name="groceriesProgressBar"
+                         Progress="{Binding GroceriesProgress}" />
+            <ProgressBar x:Name="utilitiesProgressBar"
+                         Progress="{Binding UtilitiesProgress}" />
+            <ProgressBar x:Name="transportationProgressBar"
+                         Progress="{Binding TransportationProgress}" />
+            <ProgressBar x:Name="entertainmentProgressBar"
+                         Progress="{Binding EntertainmentProgress}" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
+
