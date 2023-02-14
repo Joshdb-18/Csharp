@@ -67,7 +67,7 @@ namespace StockMarketApp
                         Console.WriteLine("\nList of available stocks: ");
                         for (int i = 0; i < stocks.Count; i++)
                         {
-                            Console.WriteLine((i + 1) + ". " + stocks[i].Name + " ($" + stocks[i].Price + ")");
+                            Console.WriteLine((i + 1) + ". " + stocks[i].Name + stocks[i].Symbol + ($" + stocks[i].Price + ")");
                         }
                         break;
                     case 5:

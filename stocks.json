@@ -1,11 +1,18 @@
 [
     {
-        "Name": "Stock 1",
+        "Name": "Amazon",
+	"Symbol": "AMZN",
         "Price": 100.00
     },
     {
-        "Name": "Stock 2",
+        "Name": "Google",
+	"Symbol": "GGLE",
         "Price": 200.00
+    },
+    {
+	"Name": "Netflix",
+	"Symbol": "NFLX",
+	"Price": 50.00
     }
 ]
 
