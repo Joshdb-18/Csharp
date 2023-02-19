@@ -13,6 +13,11 @@
 	"Name": "Netflix",
 	"Symbol": "NFLX",
 	"Price": 50.00
+    },
+    {
+	"Name": "Quix",
+	"Symbol": "QUX",
+	"Price": 1000.00
     }
 ]
 
