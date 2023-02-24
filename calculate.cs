@@ -22,7 +22,7 @@ class Program
         expenses["Utilities"] = decimal.Parse(Console.ReadLine());
 	Console.Write("How much do you spend on entertainment (e.g. movies, hobbies) per month? $ ");
         expenses["Entertainment"] = decimal.Parse(Console.ReadLine());
-	Console.Write("How much do you intend to spend on Unforseen circumstances? $ ");
+	Console.Write("How much do you intend to spend on Unforseen Circumstances? $ ");
 	expenses["Unforseen_circumstances"] = decimal.Parse(Console.ReadLine());
 
 	Console.WriteLine();
